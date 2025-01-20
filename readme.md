@@ -15,6 +15,7 @@ Projekt służy do pobierania ogłoszeń o pracę z portali Just Join IT oraz Pr
 
 # Wymagania
 Python 3
+
 Biblioteki: requests, BeautifulSoup, pandas, NumPy, Selenium, Matplotlib, re (oraz inne użyte w notebooku)
 Zainstalowany web driver do Selenium (np. ChromeDriver)
 
