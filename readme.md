@@ -37,6 +37,6 @@ python scraper_pracuj_pl.py
 # Uwagi
 * W skryptach używany jest mechanizm porównywania rekordów, by unikać duplikatów – sprawdzaj klucze unikalności (np. (Tytuł, Firma, Link)).
 * W plikach CSV przechowywane są m.in. tytuł oferty, firma, data, wynagrodzenie, technologie oraz link.
-* Plik convert_to_tidy_data.py nie jest potrzebny do prawidłowego działania programu (Jst w trakcie rozwoju)
+* Plik convert_to_tidy_data.py nie jest potrzebny do prawidłowego działania programu (Jest w trakcie rozwoju)
 
 

@@ -82,7 +82,7 @@ for offer in offers:
     technologies = technologies[1:]
 
     # Pobranie linku do oferty
-    link_tag = offer.find('a', class_='offer_list_offer_link')
+    link_tag = offer.find('a', target='_parent')
     link = 'https://justjoin.it' + link_tag['href'] if link_tag else 'Brak linku'
 
     # Dodanie danych do new_data
