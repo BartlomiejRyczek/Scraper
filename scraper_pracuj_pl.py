@@ -11,7 +11,7 @@ url = "https://it.pracuj.pl/praca?et=1%2C3%2C17"
 driver = webdriver.Chrome()
 driver.get(url)
 body = driver.find_element(By.TAG_NAME, "body")
-for _ in range(15):  # Przewiń stronę kilka razy
+for _ in range(1):  # Przewiń stronę kilka razy
     body.send_keys(Keys.PAGE_DOWN)
     time.sleep(0.2)  # Czekaj chwilę na załadowanie nowych danych
 html = driver.page_source
@@ -43,7 +43,7 @@ if os.path.exists(csv_file_path):
         next(reader, None)  # Pominięcie nagłówka
         for row in reader:
             if len(row) >= 5:  # Sprawdzamy kompletność wierszy
-                existing_records.add((row[0], row[1], row[5]))  # Tytuł, Firma, Link
+                existing_records.add((row[0], row[1]))  # Tytuł, Firma
 
 # Przygotowanie listy na nowe dane
 new_data = []
@@ -74,16 +74,17 @@ for offer in offers:
     # Pobranie linku do oferty
     link_tag = offer.find('a', class_='tiles_cnb3rfy core_n194fgoq')
     link = link_tag['href'] if link_tag else 'Brak linku'
-
-# Sprawdzenie, czy oferta już istnieje w pliku
-    record = (title, company, link)
+    
+    
+    record = (title, company)  # Uwzględniamy link jako unikalny identyfikator
     if record not in existing_records:
         new_data.append([title, company, date, salary, technologies, link])
-        existing_records.add(record)
-
+        existing_records.add(record)  # Dodajemy pełny klucz do zbioru
+        
+        
 # Zapisanie nowych danych do pliku CSV (dodawanie do istniejących)
 print(f"Ścieżka do pliku CSV: {csv_file_path}")
-print(f"Nowe dane do zapisania: {new_data}")
+#print(f"Nowe dane do zapisania: {new_data}")
 
 with open(csv_file_path, 'a', encoding='utf-8', newline='') as csvfile:
     csvwriter = csv.writer(csvfile)
