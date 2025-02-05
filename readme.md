@@ -10,13 +10,13 @@ Dane są przetwarzane, filtrowane i zapisywane do plików CSV, aby umożliwić p
 ---
 
 ## 🚀 Funkcje projektu
--✅ **Obsługa dynamicznych stron** - Selenium w tle przewija stronę, aby pobrać wszystkie dostępne oferty. 
--✅ **Automatyczne pobieranie ofert pracy** - skrypty mogą automatycznie uruchamiać się przy każdym starcie komputera, gdy plik BAT zostanie umieszczony w folderze autostartu.
--✅ **Zapis do CSV** - pobrane dane są przechowywane w pliku `job_offerts.csv` oraz `job_offerts_just_join.csv`.   
--✅ **Unikanie duplikatów** - w notebooku eliminuje się duplikaty oraz scala dane
--✅ **Zapis do CSV** - ujednolicone dane są przechowywane w pliku `oferty_pracy_bez_duplikatow.csv`.  
--✅ **Obsługa wynagrodzeń i technologii** - ekstrakcja technologii i widełek płacowych.  
--✅ **Analiza danych** - statystyki, wykresy i analiza trendów.
+- ✅ **Obsługa dynamicznych stron** - Selenium w tle przewija stronę, aby pobrać wszystkie dostępne oferty. 
+- ✅ **Automatyczne pobieranie ofert pracy** - skrypty mogą automatycznie uruchamiać się przy każdym starcie komputera, gdy plik BAT zostanie umieszczony w folderze autostartu.
+- ✅ **Zapis do CSV** - pobrane dane są przechowywane w pliku `job_offerts.csv` oraz `job_offerts_just_join.csv`.   
+- ✅ **Unikanie duplikatów** - w notebooku eliminuje się duplikaty oraz scala dane
+- ✅ **Zapis do CSV** - ujednolicone dane są przechowywane w pliku `oferty_pracy_bez_duplikatow.csv`.  
+- ✅ **Obsługa wynagrodzeń i technologii** - ekstrakcja technologii i widełek płacowych.  
+- ✅ **Analiza danych** - statystyki, wykresy i analiza trendów.
 
 
 ---
