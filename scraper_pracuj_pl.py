@@ -6,9 +6,15 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
+from selenium.webdriver.chrome.options import Options
 
 url = "https://it.pracuj.pl/praca?et=1%2C3%2C17"
-driver = webdriver.Chrome()
+options = Options()
+options.add_argument("--headless")  # Uruchamia w tle, bez okna
+options.add_argument("--disable-gpu")  # Poprawia stabilność w niektórych systemach
+options.add_argument("--window-size=1920,1080")  # Symulacja pełnowymiarowego ekranu
+
+driver = webdriver.Chrome(options=options)
 driver.get(url)
 body = driver.find_element(By.TAG_NAME, "body")
 for _ in range(1):  # Przewiń stronę kilka razy
@@ -33,7 +39,8 @@ def convert_to_iso(date_str):
         return "Brak daty"
 
 # Ścieżka do pliku CSV
-csv_file_path = 'job_offers.csv'
+base_dir = "C:\\Users\\brycz\\Downloads\\webScraper"
+csv_file_path = os.path.join(base_dir, 'job_offers.csv')
 
 # Wczytanie istniejących danych, jeśli plik już istnieje
 existing_records = set()

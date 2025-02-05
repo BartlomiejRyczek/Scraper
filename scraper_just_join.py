@@ -6,8 +6,14 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
+from selenium.webdriver.chrome.options import Options
 
-driver = webdriver.Chrome()
+options = Options()
+options.add_argument("--headless")  
+options.add_argument("--disable-gpu")  
+options.add_argument("--window-size=1920,1080")  
+
+driver = webdriver.Chrome(options=options)
 driver.get('https://justjoin.it/job-offers/all-locations?with-salary=yes&orderBy=DESC&sortBy=newest')
 body = driver.find_element(By.TAG_NAME, "body")
 for _ in range(15):  # Przewiń stronę kilka razy
@@ -17,7 +23,8 @@ html = driver.page_source
 soup = BeautifulSoup(html, 'html.parser')
 driver.quit()
 
-csv_file_path = 'job_offers_just_join.csv'
+base_dir = "C:\\Users\\brycz\\Downloads\\webScraper"
+csv_file_path = os.path.join(base_dir, 'job_offers_just_join.csv')
 existing_records = set()
 
 # Sprawdzenie, czy plik CSV istnieje i wczytanie istniejących rekordów
@@ -69,10 +76,20 @@ for offer in offers:
     salary_tag = offer.find('div', class_='MuiBox-root css-18ypp16')
     if salary_tag:
         salary_spans = salary_tag.find_all('span')
-        salary_min = salary_spans[0].get_text(strip=True)
-        salary_max = salary_spans[1].get_text(strip=True)
-        currency = salary_spans[2].get_text(strip=True)
-        salary = f"{salary_min} - {salary_max} {currency}"
+        
+        if len(salary_spans) >= 3:  # Upewniamy się, że lista ma przynajmniej 3 elementy
+            salary_min = salary_spans[0].get_text(strip=True)
+            salary_max = salary_spans[1].get_text(strip=True)
+            currency = salary_spans[2].get_text(strip=True)
+            salary = f"{salary_min} - {salary_max} {currency}"
+        elif len(salary_spans) == 2:  # Jeśli są tylko dwa elementy, prawdopodobnie brakuje waluty
+            salary_min = salary_spans[0].get_text(strip=True)
+            salary_max = salary_spans[1].get_text(strip=True)
+            salary = f"{salary_min} {salary_max}"
+        elif len(salary_spans) == 1:  # Jeśli jest tylko jedno pole, to podajemy tylko minimalne wynagrodzenie
+            salary = salary_spans[0].get_text(strip=True)
+        else:
+            salary = 'Brak wynagrodzenia'
     else:
         salary = 'Brak wynagrodzenia'
         
